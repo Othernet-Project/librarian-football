@@ -1,0 +1,70 @@
+/* line 1, ../../../src/scss/football.scss */
+.tabs {
+  width: 100%;
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+/* line 9, ../../../src/scss/football.scss */
+/* line 8, ../../../src/scss/football.scss */
+.tab-links:after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+/* line 15, ../../../src/scss/football.scss */
+/* line 15, ../../../src/scss/football.scss */
+.tab-links li {
+  margin: 0px 5px;
+  float: left;
+  list-style: none;
+}
+
+/* line 21, ../../../src/scss/football.scss */
+/* line 22, ../../../src/scss/football.scss */
+.tab-links a {
+  padding: 9px 15px;
+  display: inline-block;
+  border-radius: 3px 3px 0px 0px;
+  background: #255a89;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  transition: all linear 0.15s;
+}
+
+/* line 32, ../../../src/scss/football.scss */
+/* line 34, ../../../src/scss/football.scss */
+.tab-links a:hover {
+  background: #a7cce5;
+  text-decoration: none;
+}
+
+/* line 37, ../../../src/scss/football.scss */
+/* line 40, ../../../src/scss/football.scss */
+li.active a, li.active a:hover {
+  background: #fff;
+  color: #4c4c4c;
+}
+
+/* line 42, ../../../src/scss/football.scss */
+/* line 46, ../../../src/scss/football.scss */
+.tab-content {
+  padding: 15px;
+  border-radius: 3px;
+  box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+  background: #fff;
+}
+
+/* line 49, ../../../src/scss/football.scss */
+/* line 54, ../../../src/scss/football.scss */
+.tab {
+  display: none;
+}
+
+/* line 53, ../../../src/scss/football.scss */
+/* line 59, ../../../src/scss/football.scss */
+.tab.active {
+  display: block;
+}
