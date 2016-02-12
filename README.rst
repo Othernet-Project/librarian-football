@@ -38,4 +38,4 @@ use::
 .. _librarian-content: https://github.com/Outernet-Project/librarian-core
 .. _compass: http://compass-style.org/
 .. _coffeescript: http://coffeescript.org/
--- _untangle: https://github.com/stchris/untangle
+.. _untangle: https://github.com/stchris/untangle
