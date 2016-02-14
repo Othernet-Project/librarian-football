@@ -21,22 +21,8 @@ class Continent(object):
 def football_scores():
     key = request.app.config['football.xmlsoccer_key']
     leagues = xmlsoccer.get_all_leagues(key)
-    continents = [Continent('Europe'), 
-                  Continent('Africa'), 
-                  Continent('Asia'),
-                  Continent('North America'), 
-                  Continent('South America'), 
-                  Continent('Australia')]
-
-    for continent in continents:
-    	continent_leagues = []
-        for league in leagues:
-            if league.continent == continent.name:
-                continent_leagues.append(league)
-                continent.leagues = continent_leagues
 
     return dict(leagues=leagues,
-    	        continents=continents,
     	        base_path=i18n_url('football'),
                 view=request.params.get('view'))
 
