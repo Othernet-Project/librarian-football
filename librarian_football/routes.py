@@ -10,16 +10,9 @@ EXPORTS = {
 }
 
 
-class Continent(object):
-    def __init__(self, name):
-        super(Continent, self).__init__()
-        self.name = name
-        self.leagues = []
-
-
 @view('football/football')
 def football_scores():
-    key = request.app.config['football.xmlsoccer_key']
+    key = request.app.config['football.xmlsoccer_demo_key']
     leagues = adapter.get_all_leagues(key)
 
     return dict(leagues=leagues,
