@@ -118,10 +118,10 @@ def _continent_for_country(country):
 
 class League(object):
     def __init__(self, **kwargs):
-	    super(League, self).__init__()
-	    self.name = kwargs.get('name')
-	    self.country = kwargs.get('country')
-	    self.continent = _continent_for_country(kwargs.get('country'))
+        super(League, self).__init__()
+        self.name = kwargs.get('name')
+        self.country = kwargs.get('country')
+        self.continent = _continent_for_country(kwargs.get('country'))
 
 
 def get_all_leagues(api_key):
