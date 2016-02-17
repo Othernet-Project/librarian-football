@@ -12,7 +12,8 @@ ${_('Football')}
 	<%section:league name="${league.name}">
     </%section:league>
 % endfor
-</div></%block>
+</div>
+</%block>
 
 <%block name="extra_head">
 <link rel="stylesheet" href="${assets['css/football']}">
