@@ -1,4 +1,5 @@
 <%inherit file="/base.tpl"/>
+<%namespace file="_football_league.tpl" name="section"/>
 
 <%block name="title">
 ## Translators, used as page title
@@ -6,9 +7,10 @@ ${_('Football')}
 </%block>
 
 <%block name="main">
-<div class="tab-content">
+<div class="leagues-list o-collapsible" id="leagues-list">
 % for league in leagues:
-    <p>${league.name}</p>
+	<%section:league name="${league.name}">
+    </%section:league>
 % endfor
 </div></%block>
 
