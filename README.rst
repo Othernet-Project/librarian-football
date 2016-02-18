@@ -11,7 +11,6 @@ The component has the following dependencies:
 
 - librarian-core_
 - librarian-content_
-- requests_
 
 To enable this component, add it to the list of components in librarian_'s
 `config.ini` file, e.g.::
@@ -44,4 +43,3 @@ use::
 .. _librarian-content: https://github.com/Outernet-Project/librarian-core
 .. _compass: http://compass-style.org/
 .. _coffeescript: http://coffeescript.org/
-.. _requests: https://pypi.python.org/pypi/requests
