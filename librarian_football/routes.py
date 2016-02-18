@@ -3,7 +3,6 @@ import os
 from bottle import request
 from bottle_utils.i18n import i18n_url
 from librarian_core.contrib.templates.renderer import view
-from adapters import football_data as adapter
 
 
 EXPORTS = {
@@ -13,9 +12,7 @@ EXPORTS = {
 
 @view('football/football')
 def football_scores():
-    key = request.app.config['app.football_data_key']
-    leagues = adapter.get_all_leagues(key)
-    leagues.sort(key=lambda x: x.name)
+    leagues = []
 
     return dict(leagues=leagues,
     	        base_path=i18n_url('football'),

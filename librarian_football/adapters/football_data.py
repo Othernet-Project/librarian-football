@@ -1,28 +1,27 @@
-import requests, json
+class League(dict):
+	"""docstring for League"""
+	def __init__(self, params):
+		super(League, self).__init__()
+		self.name = params['caption']
+		self.fixtures = params['fixtures']
 
 
-BASE_URL = 'http://api.football-data.org'
+class Fixture(dict):
+	"""docstring for Fixture"""
+	def __init__(self, params):
+		super(Fixture, self).__init__()
+		self.date = params['date']
+		self.status = params['status']
+		self.match_day = params['matchday']
+		self.home_team = params['homeTeam']
+		self.away_team = params['awayTeam']
+		self.result = params['result']
 
 
-class League(object):
-    def __init__(self, params):
-        super(League, self).__init__()
-
-        if 'caption' not in params or params == None:
-            return None
-
-        self.name = params['caption']
-
-
-def get_all_leagues(api_key):
-    url = BASE_URL + '/v1/soccerseasons/'
-    params = { 'X-Auth-Token': api_key, 'X-Response-Control': 'minified' }
-    response = requests.get(url, params=params)
-    json_leagues = json.loads(response.text.encode('utf-8'))
-
-    leagues = []
-    for json_league in json_leagues:
-        league = League(json_league)
-        leagues.append(league)
-
-    return leagues
+class FixtureResult(dict):
+	"""docstring for FixtureResult"""
+	def __init__(self, params):
+		super(FixtureResult, self).__init__()
+		self.goals_away_team = params['goalsAwayTeam']
+		self.goals_home_team = params['goalsHomeTeam']
+		
