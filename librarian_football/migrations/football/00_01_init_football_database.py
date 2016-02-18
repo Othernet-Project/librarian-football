@@ -1,9 +1,29 @@
 SQL = """
-create table leagues
+CREATE TABLE leagues
 (
-    id varchar primary key not null,                -- ID
-    name text,                                      -- league name
-    created timestamp not null                      -- creation timestamp
+    id INT NOT NULL,
+    name VARCHAR,
+    created TIMESTAMP NOT NULL,
+    current_matchday INT,
+    number_of_matchdays INT,
+    
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE fixtures
+(
+    id INT NOT NULL,
+    league_id INT NOT NULL,
+    home_team_name VARCHAR,
+    away_team_name VARCHAR,
+    status VARCHAR,
+    matchday INT,
+    home_team_goals INT,
+    away_team_goals INT,
+    created TIMESTAMP NOT NULL,
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (league_id) REFERENCES leagues(id)
 );
 """
 
