@@ -2,6 +2,7 @@ from bottle import request
 from bottle_utils.i18n import i18n_url
 from librarian_core.contrib.templates.renderer import view
 
+import adapters.football_data as adapter
 
 EXPORTS = {
     'routes': {'required_by': ['librarian_core.contrib.system.routes.routes']}
@@ -10,7 +11,8 @@ EXPORTS = {
 
 @view('football/football')
 def football_scores():
-    leagues = []
+    db = request.db['football']
+    leagues = adapter.get_all_leagues(db)
     return dict(leagues=leagues,
     	        base_path=i18n_url('football'),
                 view=request.params.get('view'))
