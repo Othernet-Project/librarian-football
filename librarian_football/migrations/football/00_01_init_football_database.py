@@ -17,7 +17,7 @@ CREATE TABLE fixtures
     home_team_name VARCHAR,
     away_team_name VARCHAR,
     status VARCHAR,
-    date DATETIME
+    date TIMESTAMP,
     matchday INT,
     home_team_goals INT,
     away_team_goals INT,
