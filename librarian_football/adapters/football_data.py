@@ -1,66 +1,115 @@
-class League(object):
-    """docstring for League"""
-    def __init__(self, params):
-        super(League, self).__init__()
-        self.name = params['name']
-        self.current_matchday = params['current_matchday']
-        self.number_of_matchdays = params['number_of_matchdays']
-        self.fixtures = []
+import json
 
 
-class Fixture(object):
-	"""docstring for Fixture"""
-	def __init__(self, params):
-		super(Fixture, self).__init__()
-		self.home_team_name = params['home_team_name']
-		self.away_team_name = params['away_team_name']
-		self.status = params['status']
-		self.date = params['date']
-		self.matchday = params['matchday']
-		self.home_team_goals = params['home_team_goals']
-		self.away_team_goals = params['away_team_goals']
+def parse(db, path):
+	if not _is_json_file(path):
+		return
+
+	try:
+		file = open(path)
+	except IOError:
+		return
+
+	json_data = json.load(file)
+	
+	if _is_leagues_file(path):
+		_import_leagues(db, json_data)
+
+	elif _is_league_fixtures_file(path):
+		_import_league_fixtures(db, json_data)
+
+
+def _is_json_file(path):
+	return path[-5:] == '.json'
+
+
+def _is_leagues_file(path):
+	path_elems = path.split('/')
+	file_name = path_elems[-1]
+	return file_name == 'leagues_list.json'
+
+
+def _is_league_fixtures_file(path):
+	path_elems = path.split('/')
+	file_name = path_elems[-1]
+	file_name_elems = file_name.split('_')
+	
+	if len(file_name_elems) == 3:
 		
+		if file_name_elems[0] != 'league':
+			return False
 
-def _league_row_to_dict(row):
-	return { "id": row[0],
-			 "name": row[1],
-			 "created": row[2],
-			 "current_matchday": row[3],
-			 "number_of_matchdays": row[4]
+		try:
+			int(file_name_elems[1])
+		except:
+			return False
+
+		if file_name_elems[2] != 'fixtures.json':
+			return False
+
+		return True
+	return False
+
+
+def _get_league_dict(league):
+	return { 'id': league['id'],
+             'name': league['caption'],
+             'current_matchday': league['currentMatchday'],
+             'number_of_matchdays': league['numberOfMatchdays']
+    }
+
+
+def _get_fixture_dict(fixture):
+	return { 'id': _get_fixture_id(fixture),
+	         'league_id': _get_league_id(fixture),
+	         'home_team_name': fixture['homeTeamName'],
+	         'away_team_name': fixture['awayTeamName'],
+	         'status': fixture['status'],
+	         'date': fixture['date'],
+	         'matchday': fixture['matchday'],
+	         'home_team_goals': _get_fixture_home_goals(fixture),
+	         'away_team_goals': _get_fixture_away_goals(fixture)
 	}
 
 
-def _fixture_row_to_dict(row):
-	return { "id": row[0],
-			 "league_id": row[1],
-			 "home_team_name": row[2],
-			 "away_team_name": row[3],
-			 "status": row[4],
-			 "date": row[5],
-			 "matchday": row[6],
-			 "home_team_goals": row[7],
-			 "away_team_goals": row[8],
-			 "created": row[9]
-	}
+def _get_league_id(fixture):
+	links = fixture['_links']
+	soccerseason = links['soccerseason']
+	soccerseason_href = soccerseason['href']
+	soccerseason_href_elems = soccerseason_href.split('/')
+	return int(soccerseason_href_elems[-1])
 
 
-def get_all_leagues(db):
-	query_leagues = db.Select(sets='leagues')
-	leagues_db = db.fetchall(query_leagues)
-	leagues = []
+def _get_fixture_id(fixture):
+	links = fixture['_links']
+	self = links['self']
+	self_href = self['href']
+	self_href_elems = self_href.split('/')
+	return int(self_href_elems[-1])
 
-	for league_db in leagues_db:
-		league = League(_league_row_to_dict(league_db))
-		query_fixtures = db.Select(sets='fixtures')
-		query_fixtures.where = 'league_id = ' + str(league['id'])
-		fixtures_db = db.fetchall(query_fixtures)
-		
-		fixtures = []
-		for fixture_db in fixtures_db:
-			fixture = Fixture(_fixture_row_to_dict(fixture_db))
-			fixtures.append(fixture)
 
-		league.fixtures = fixtures
-		leagues.append(league)
+def _get_fixture_home_goals(fixture):
+	result = fixture['result']
+	home_goals = result['goalsHomeTeam']
+	return home_goals
 
-	return leagues
+
+def _get_fixture_away_goals(fixture):
+	result = fixture['result']
+	away_goals = result['goalsAwayTeam']
+	return away_goals
+
+
+def _import_leagues(db, data):
+	cols = ['id', 'name', 'current_matchday', 'number_of_matchdays']
+	query = db.Insert('leagues', cols=cols)
+	vals = (_get_league_dict(league) for league in data)
+	db.executemany(query, vals)
+
+
+def _import_league_fixtures(db, data):
+	cols = ['id', 'league_id', 'home_team_name', 'away_team_name', 'status',
+	        'date', 'matchday', 'home_team_goals', 'away_team_goals']
+	query = db.Insert('fixtures', cols=cols)
+	vals = (_get_fixture_dict(fixture) for fixture in data['fixtures'])
+	db.executemany(query, vals)

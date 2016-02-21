@@ -3,7 +3,7 @@ CREATE TABLE leagues
 (
     id INT NOT NULL,
     name VARCHAR,
-    created TIMESTAMP NOT NULL,
+    created TIMESTAMP DEFAULT NOW(),
     current_matchday INT,
     number_of_matchdays INT,
     
@@ -21,7 +21,7 @@ CREATE TABLE fixtures
     matchday INT,
     home_team_goals INT,
     away_team_goals INT,
-    created TIMESTAMP NOT NULL,
+    created TIMESTAMP DEFAULT NOW(),
 
     PRIMARY KEY (id),
     FOREIGN KEY (league_id) REFERENCES leagues(id)
