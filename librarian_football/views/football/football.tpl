@@ -9,7 +9,7 @@ ${_('Football')}
 <%block name="main">
 <div class="football-leagues-list o-collapsible" id="football-leagues-list">
 % for league in leagues:
-	<%section:league name="${league.name}" id="${league.id}"></%section:league>
+    <%section:league name="${league.name}" id="${league.id}"></%section:league>
 % endfor
 </div>
 </%block>
