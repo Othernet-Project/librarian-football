@@ -2,6 +2,7 @@ class League(object):
     """docstring for League"""
     def __init__(self, params):
         super(League, self).__init__()
+        self.id = params['id']
         self.name = params['name']
         self.current_matchday = params['current_matchday']
         self.number_of_matchdays = params['number_of_matchdays']

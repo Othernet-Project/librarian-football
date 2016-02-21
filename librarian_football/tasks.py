@@ -7,9 +7,9 @@ def fsal_callback(supervisor, event):
     config = supervisor.config
 
     # Ignore irrelevant events
-    if config['football.data_dir'] not in event_file_path or
-                     event.event_type == fs.EVENT_DELETED or 
-                     event.event_type == fs.EVENT_MODIFIED:
+    if (config['football.data_dir'] not in event_file_path or 
+                      event.event_type == fs.EVENT_DELETED or 
+                      event.event_type == fs.EVENT_MODIFIED):
         return
 
     # Get list of files in data directory
