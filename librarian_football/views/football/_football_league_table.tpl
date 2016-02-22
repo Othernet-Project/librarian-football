@@ -1,7 +1,7 @@
 <%namespace file="/ui/nojs.tpl" name="nojs"/>
 <%namespace file="_league_table_sections.tpl" name="section"/>
 
-<%def name="league_table(league, fixtures)">
+<%def name="league_table(league)">
     <section class="football-league-section o-collapsible-section ${nojs.cls_toggle(league.name, 'o-collapsed', flip=True)}" id="league-${league.id}">
     <h2 class="o-collapsible-section-title" id="league-${league.id}-header">
         <a href="${nojs.comp_url(league.name)}" role="button">

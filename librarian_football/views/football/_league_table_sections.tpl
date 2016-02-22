@@ -2,7 +2,7 @@
 
 <%def name="league_rankings(teams)">
     <section>
-        
+
     </section>
 </%def>
 
