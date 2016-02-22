@@ -10,8 +10,12 @@
         </a>
     </h2>
     <div class="football-league-content o-collapsible-section-panel" id="league-${league.id}-panel">
-        <%section:league_schedule fixtures="${league.fixtures}"></%section:league_schedule>
-        <%section:league_rankings teams="${league.teams}"></%section:league_rankings>
+        <div class="league-schedule-column">
+            <%section:league_schedule fixtures="${league.fixtures}"></%section:league_schedule>
+        </div>
+        <div class="league-rankings-column">
+            <%section:league_rankings teams="${league.teams}"></%section:league_rankings>    
+        </div>
     </div>
     </section>
 </%def>

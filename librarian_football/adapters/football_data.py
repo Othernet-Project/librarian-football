@@ -1,5 +1,7 @@
 import json
 
+from librarian_core.contrib.cache.decorators import invalidates
+
 
 def parse(db, path):
     if not _is_json_file(path):
@@ -11,7 +13,11 @@ def parse(db, path):
         return
 
     json_data = json.load(file)
-    
+    _import_data(path, db, json_data)
+
+
+@invalidates(prefix='football_data')
+def _import_data(path, db, data):
     if _is_leagues_file(path):
         _import_leagues(db, json_data)
 

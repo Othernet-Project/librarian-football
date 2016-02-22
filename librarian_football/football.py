@@ -72,14 +72,22 @@ def _team_row_to_dict(row):
 
 
 def _get_league_fixtures(l_db, db):
-    query = db.Select(sets='fixtures')
-    query.where = 'league_id = ' + str(l_db[0])
-    fixtures_db = db.fetchall(query)
+    league_id = str(l_db[0])
+    num_matchdays = l_db[4]
 
     fixtures = []
-    for f_db in fixtures_db:
-        fixture = Fixture(_fixture_row_to_dict(f_db))
-        fixtures.append(fixture)
+    for k in range(1, num_matchdays + 1):
+        query = db.Select(sets='fixtures')
+        query.where = 'league_id = ' + league_id
+        query.where &= 'matchday = ' + str(k) 
+        fixtures_db = db.fetchall(query)
+
+        fixtures_k = []
+        for f_db in fixtures_db:
+            fixture = Fixture(_fixture_row_to_dict(f_db))
+            fixtures_k.append(fixture)
+
+        fixtures.append(fixtures_k)
 
     return fixtures
 
