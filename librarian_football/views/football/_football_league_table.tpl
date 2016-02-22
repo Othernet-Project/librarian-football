@@ -9,7 +9,7 @@
             ${league.name}
         </a>
     </h2>
-    <div class="football-league-content o-collapsible-section-panel" id="league-${id}-panel">
+    <div class="football-league-content o-collapsible-section-panel" id="league-${league.id}-panel">
         <%section:league_schedule fixtures="${league.fixtures}"></%section:league_schedule>
         <%section:league_rankings teams="${league.teams}"></%section:league_rankings>
     </div>

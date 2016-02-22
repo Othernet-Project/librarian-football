@@ -14,6 +14,7 @@ class Fixture(object):
     """docstring for Fixture"""
     def __init__(self, params):
         super(Fixture, self).__init__()
+        self.id = params['id']
         self.home_team_name = params['home_team_name']
         self.away_team_name = params['away_team_name']
         self.status = params['status']
@@ -27,6 +28,7 @@ class Team(object):
     """docstring for Team"""
     def __init__(self, params):
         super(Team, self).__init__()
+        self.id = params['id']
         self.name = params['name']
         self.position = params['position']
         self.wins = params['wins']

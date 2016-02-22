@@ -8,6 +8,6 @@
 
 <%def name="league_schedule(fixtures)">
     <section>
-        
+    
     </section>
 </%def>
