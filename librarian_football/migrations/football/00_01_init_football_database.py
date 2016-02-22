@@ -26,6 +26,21 @@ CREATE TABLE fixtures
     PRIMARY KEY (id),
     FOREIGN KEY (league_id) REFERENCES leagues(id)
 );
+
+CREATE TABLE teams
+(
+    id INT NOT NULL,
+    league_id INT NOT NULL,
+    name VARCHAR,
+    position INT,
+    wins INT,
+    losses INT,
+    draws INT,
+    created TIMESTAMP DEFAULT NOW(),
+
+    PRIMARY KEY (id),
+    FOREIGN KEY (league_id) REFERENCES leagues(id)
+)
 """
 
 

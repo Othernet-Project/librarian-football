@@ -1,5 +1,5 @@
 <%inherit file="/base.tpl"/>
-<%namespace file="_football_league_section.tpl" name="section"/>
+<%namespace file="_football_league_table.tpl" name="section"/>
 
 <%block name="title">
 ## Translators, used as page title
@@ -8,8 +8,8 @@ ${_('Football')}
 
 <%block name="main">
 <div class="football-leagues-list o-collapsible" id="football-leagues-list">
-% for league in leagues:
-    <%section:league name="${league.name}" id="${league.id}"></%section:league>
+% for l in leagues:
+    <%section:league_table league="${l}" fixtures="${l.fixtures}"></%section:league_table>
 % endfor
 </div>
 </%block>
