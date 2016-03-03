@@ -6,4 +6,4 @@ class FootballMenuItem(MenuItem):
     name = 'football'
     label = _("Football")
     icon_class = 'football'
-    route = 'football:scores'
+    route = 'leagues:list'

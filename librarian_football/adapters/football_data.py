@@ -1,35 +1,38 @@
 import json
 
-from librarian_core.contrib.cache.decorators import invalidates
+def parse(db, files, dirs):
+    leagues_file = _find_leagues_file(files)
+    fixture_files = _find_fixture_files(files)
+    rankings_files = _find_rankings_files(files)
+
+    _import_leagues(db, leagues_file)
+    _import_fixtures(db, fixture_files)
+    _import_rankings(db, rankings_files)
 
 
-def parse(db, path):
-    if not _is_json_file(path):
-        return
-
-    try:
-        file = open(path)
-    except IOError:
-        return
-
-    json_data = json.load(file)
-    _import_data(path, db, json_data)
+def _find_leagues_file(files):
+    file = None
+    for f in files:
+        if _is_leagues_file(f.path):
+            file = f
+            break
+    return file
 
 
-@invalidates(prefix='football_data')
-def _import_data(path, db, data):
-    if _is_leagues_file(path):
-        _import_leagues(db, json_data)
-
-    elif _is_league_fixtures_file(path):
-        _import_league_fixtures(db, json_data)
-
-    elif _is_league_rankings_file(path):
-        _import_league_rankings(db, json_data)
+def _find_fixture_files(files):
+    fixture_files = []
+    for f in files:
+        if _is_fixture_file(f.path):
+            fixture_files.append(f)
+    return fixture_files
 
 
-def _is_json_file(path):
-    return path[-5:] == '.json'
+def _find_rankings_files(files):
+    rankings_files = []
+    for f in files:
+        if _is_rankings_file(f.path):
+            rankings_files.append(f)
+    return rankings_files
 
 
 def _is_leagues_file(path):
@@ -38,7 +41,7 @@ def _is_leagues_file(path):
     return file_name == 'leagues_list.json'
 
 
-def _is_league_fixtures_file(path):
+def _is_fixture_file(path):
     path_elems = path.split('/')
     file_name = path_elems[-1]
     file_name_elems = file_name.split('_')
@@ -60,7 +63,7 @@ def _is_league_fixtures_file(path):
     return False
 
 
-def _is_league_rankings_file(path):
+def _is_rankings_file(path):
     path_elems = path.split('/')
     file_name = path_elems[-1]
     file_name_elems = file_name.split('_')
@@ -80,6 +83,42 @@ def _is_league_rankings_file(path):
 
         return True
     return False
+
+
+def _import_leagues(db, file):
+    file_path = file.path
+    with open(file_path) as f:
+        json_leagues = json.load(f)
+        cols = ['id', 'name', 'current_matchday', 'number_of_matchdays']
+        query = db.Insert('leagues', cols=cols)
+        vals = (_get_league_dict(league) for league in json_leagues)
+        db.executemany(query, vals)
+
+
+def _import_fixtures(db, files):
+    for file in files:
+        file_path = file.path
+        with open(file_path) as f:
+            json_fixtures = json.load(f)
+            if json_fixtures.has_key('fixtures'):
+                cols = ['id', 'league_id', 'home_team_name', 'away_team_name', 'status',
+                        'date', 'matchday', 'home_team_goals', 'away_team_goals']
+                query = db.Insert('fixtures', cols=cols)
+                vals = (_get_fixture_dict(fixture) for fixture in json_fixtures['fixtures'])
+                db.executemany(query, vals)
+
+
+def _import_rankings(db, files):
+    for file in files:
+        file_path = file.path
+        with open(file_path) as f:
+            json_rankings = json.load(f)
+            if json_rankings.has_key('standing') and json_rankings.has_key('_links'):
+                cols = ['id', 'league_id', 'name', 'position', 'wins', 'losses', 'draws']
+                query = db.Insert('teams', cols=cols)
+                league_id = _get_league_id_from_rankings_links(json_rankings['_links'])
+                vals = (_get_team_dict(team, league_id) for team in json_rankings['standing'])
+                db.executemany(query, vals)
 
 
 def _get_league_dict(league):
@@ -155,26 +194,3 @@ def _get_fixture_away_goals(fixture):
     result = fixture['result']
     away_goals = result['goalsAwayTeam']
     return away_goals
-
-
-def _import_leagues(db, data):
-    cols = ['id', 'name', 'current_matchday', 'number_of_matchdays']
-    query = db.Insert('leagues', cols=cols)
-    vals = (_get_league_dict(league) for league in data)
-    db.executemany(query, vals)
-
-
-def _import_league_fixtures(db, data):
-    cols = ['id', 'league_id', 'home_team_name', 'away_team_name', 'status',
-            'date', 'matchday', 'home_team_goals', 'away_team_goals']
-    query = db.Insert('fixtures', cols=cols)
-    vals = (_get_fixture_dict(fixture) for fixture in data['fixtures'])
-    db.executemany(query, vals)
-
-
-def _import_league_rankings(db, data):
-    cols = ['id', 'league_id', 'name', 'position', 'wins', 'losses', 'draws']
-    query = db.Insert('teams', cols=cols)
-    league_id = _get_league_id_from_rankings_links(data['_links'])
-    vals = (_get_team_dict(team, league_id) for team in data['standing'])
-    db.executemany(query, vals)

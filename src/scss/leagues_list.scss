@@ -1,0 +1,41 @@
+.leagues-list .leagues-list-item {
+    -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.75);
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.leagues-list .leagues-list-item a {
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+    padding: 1rem;
+    width: 100%;
+    color: #333;
+}
+
+.leagues-list .leagues-list-item a:hover {
+    color: #004f90;
+}
+
+.leagues-list .leagues-list-item p {
+    font-size: 120%;
+    font-weight: normal;
+    text-decoration: none;
+    display: inline-block;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    width: 100%;
+    color: #333;
+}
+
+.pager {
+    text-align: center;
+    margin-top: 2rem;
+}
