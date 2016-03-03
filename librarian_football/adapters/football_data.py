@@ -89,7 +89,7 @@ def _import_leagues(db, file):
     file_path = file.path
     with open(file_path) as f:
         json_leagues = json.load(f)
-        cols = ['id', 'name', 'current_matchday', 'number_of_matchdays']
+        cols = ['id', 'name', 'current_matchday', 'number_of_matchdays', 'last_updated']
         query = db.Insert('leagues', cols=cols)
         vals = (_get_league_dict(league) for league in json_leagues)
         db.executemany(query, vals)
@@ -125,7 +125,8 @@ def _get_league_dict(league):
     return { 'id': league['id'],
              'name': league['caption'],
              'current_matchday': league['currentMatchday'],
-             'number_of_matchdays': league['numberOfMatchdays']
+             'number_of_matchdays': league['numberOfMatchdays'],
+             'last_updated': league['lastUpdated']
     }
 
 

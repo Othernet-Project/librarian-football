@@ -6,6 +6,7 @@ CREATE TABLE leagues
     created TIMESTAMP DEFAULT NOW(),
     current_matchday INT,
     number_of_matchdays INT,
+    last_updated TIMESTAMP,
     
     PRIMARY KEY (id)
 );

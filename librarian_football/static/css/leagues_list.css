@@ -20,14 +20,15 @@
   padding: 1rem;
   width: 100%;
   color: #333;
+  transition: all 0.3s ease;
 }
 
-/* line 23, ../../../src/scss/leagues_list.scss */
+/* line 24, ../../../src/scss/leagues_list.scss */
 .leagues-list .leagues-list-item a:hover {
-  color: #004f90;
+  color: #00A2DB;
 }
 
-/* line 27, ../../../src/scss/leagues_list.scss */
+/* line 28, ../../../src/scss/leagues_list.scss */
 .leagues-list .leagues-list-item p {
   font-size: 120%;
   font-weight: normal;
@@ -39,7 +40,7 @@
   color: #333;
 }
 
-/* line 38, ../../../src/scss/leagues_list.scss */
+/* line 39, ../../../src/scss/leagues_list.scss */
 .pager {
   text-align: center;
   margin-top: 2rem;
