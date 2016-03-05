@@ -1,5 +1,9 @@
 import json
 
+from librarian_core.contrib.cache.decorators import invalidates
+
+
+@invalidates(prefix='leagues_list')
 def parse(db, files, dirs):
     leagues_file = _find_leagues_file(files)
     fixture_files = _find_fixture_files(files)
@@ -89,7 +93,7 @@ def _import_leagues(db, file):
     file_path = file.path
     with open(file_path) as f:
         json_leagues = json.load(f)
-        cols = ['id', 'name', 'current_matchday', 'number_of_matchdays', 'last_updated']
+        cols = ['id', 'name', 'short_name', 'current_matchday', 'number_of_games', 'number_of_matchdays', 'last_updated', 'year', 'number_of_teams']
         query = db.Insert('leagues', cols=cols)
         vals = (_get_league_dict(league) for league in json_leagues)
         db.executemany(query, vals)
@@ -124,9 +128,13 @@ def _import_rankings(db, files):
 def _get_league_dict(league):
     return { 'id': league['id'],
              'name': league['caption'],
+             'short_name': league['league'],
              'current_matchday': league['currentMatchday'],
+             'number_of_games': league['numberOfGames'],
              'number_of_matchdays': league['numberOfMatchdays'],
-             'last_updated': league['lastUpdated']
+             'last_updated': league['lastUpdated'],
+             'year': league['year'],
+             'number_of_teams': league['numberOfTeams']
     }
 
 

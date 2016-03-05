@@ -3,10 +3,14 @@ CREATE TABLE leagues
 (
     id INT NOT NULL,
     name VARCHAR,
+    short_name VARCHAR,
+    number_of_games INT,
     created TIMESTAMP DEFAULT NOW(),
     current_matchday INT,
     number_of_matchdays INT,
     last_updated TIMESTAMP,
+    year INT,
+    number_of_teams INT,
     
     PRIMARY KEY (id)
 );

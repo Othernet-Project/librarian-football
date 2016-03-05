@@ -4,8 +4,13 @@ class League(object):
         super(League, self).__init__()
         self.id = params['id']
         self.name = params['name']
+        self.short_name = params['short_name']
+        self.number_of_games = params['number_of_games']
         self.current_matchday = params['current_matchday']
         self.number_of_matchdays = params['number_of_matchdays']
+        self.last_updated = params['last_updated']
+        self.year = params['year']
+        self.number_of_teams = params['number_of_teams']
         self.fixtures = []
         self.teams = []
 
@@ -39,9 +44,14 @@ class Team(object):
 def _league_row_to_dict(row):
     return { "id": row[0],
              "name": row[1],
-             "created": row[2],
-             "current_matchday": row[3],
-             "number_of_matchdays": row[4]
+             "short_name": row[2],
+             "number_of_games": row[3],
+             "created": row[4],
+             "current_matchday": row[5],
+             "number_of_matchdays": row[6],
+             "last_updated": row[7],
+             "year": row[8],
+             "number_of_teams": row[9]
     }
 
 

@@ -16,6 +16,7 @@ EXPORTS = {
 
 
 @view('football/leagues_list')
+@cached(prefix='leagues_list')
 def leagues_list():
     try:
         q = urlunquote(request.params['q'])
@@ -39,6 +40,7 @@ def leagues_list():
     
     return dict(leagues=leagues,
                 pager=pager,
+                is_search=is_search,
                 base_path=i18n_url('leagues:list'),
                 view=request.params.get('view'))
 

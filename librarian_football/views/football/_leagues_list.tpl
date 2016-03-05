@@ -1,10 +1,11 @@
 <%namespace name="ui_pager" file="/ui/pager.tpl"/>
 
+
 <ul class="leagues-list" id="leagues-list">
     % for l in leagues:
     <li class="leagues-list-item" role="row">
         <a href="#">${l.name}</a>
-        <p>Week ${l.current_matchday}</p>
+        <p>Last Updated: ${l.last_updated}</p>
     </li>
     % endfor
 </ul>
