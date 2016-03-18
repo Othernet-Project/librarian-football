@@ -43,10 +43,6 @@ def dump_database(db):
     last because 'teams' and 'fixtures' tables have foreign keys to the 'leagues' 
     table.
     """
-    
-    query_teams = db.Delete('teams')
-    query_fixtures = db.Delete('fixtures')
-    query_leagues = db.Delete('leagues')
-    db.execute(query_teams)
-    db.execute(query_fixtures)
-    db.execute(query_leagues)
+   
+    for table in ('teams', 'fixtures', 'leagues'):
+        db.execute(db.Delete(table))
