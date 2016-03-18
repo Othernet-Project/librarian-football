@@ -1,13 +1,14 @@
-import football
-
 from bottle import request
 from bottle_utils.i18n import i18n_url
 from bottle_utils.ajax import roca_view
 from bottle_utils.html import urlunquote
-from librarian_core.contrib.templates.renderer import view
-from librarian_core.contrib.templates.renderer import template
-from librarian_core.contrib.cache.decorators import cached
+
 from librarian_ui.paginator import Paginator
+from librarian_core.contrib.templates.renderer import view
+from librarian_core.contrib.cache.decorators import cached
+from librarian_core.contrib.templates.renderer import template
+
+from . import football
 
 
 EXPORTS = {
