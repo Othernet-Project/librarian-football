@@ -1,5 +1,4 @@
 class League(object):
-    """docstring for League"""
     def __init__(self, params):
         super(League, self).__init__()
         self.id = params['id']
@@ -16,7 +15,6 @@ class League(object):
 
 
 class Fixture(object):
-    """docstring for Fixture"""
     def __init__(self, params):
         super(Fixture, self).__init__()
         self.id = params['id']
@@ -36,7 +34,6 @@ class Fixture(object):
 
 
 class Team(object):
-    """docstring for Team"""
     def __init__(self, params):
         super(Team, self).__init__()
         self.id = params['id']
@@ -46,6 +43,67 @@ class Team(object):
         self.losses = params['losses']
         self.draws = params['draws']
         
+
+def get_leagues(db, pager, dict={}, fixtures=True, teams=True):
+    """
+    Retrieve all leagues from the football database. Set 'fixtures' 
+    and 'teams' to either True or False to either include or not 
+    include the corresponding fixtures and teams data. The 'dict'
+    parameter can be used to filter the leagues based on a key value
+    pair.
+    """
+
+    query = db.Select(sets='leagues')
+    offset, limit = pager.items
+    query.offset = offset
+    query.limit = limit
+    query.order = 'name'
+
+    for key in dict:
+        query.where &= key + " LIKE '%" + dict[key] + "%'"
+
+    leagues_db = db.fetchall(query)
+    leagues = []
+
+    for l_db in leagues_db:
+        league = League(_league_row_to_dict(l_db))
+        if fixtures == True:
+            league.fixtures = _get_league_fixtures(l_db, db)
+        if teams == True:
+            league.teams = _get_league_teams(l_db, db)
+        leagues.append(league)
+
+    return leagues
+
+
+def get_league(db, league_id, fixtures=True, teams=True):
+    """
+    Retrieve a particular league from the football database. Set 'fixtures' 
+    and 'teams' to either True or False to either include or not 
+    include the corresponding fixtures and teams data.
+    """
+
+    query = db.Select(sets='leagues')
+    query.where = 'id = ' + str(league_id)
+    l_db = db.fetchall(query)
+    league = League(_league_row_to_dict(l_db[0]))
+    if fixtures == True:
+        league.fixtures = _get_league_fixtures(l_db[0], db)
+    if teams == True:
+        league.teams = _get_league_teams(l_db[0], db)
+    return league
+
+
+def get_leagues_count(db, dict={}):
+    """
+    Retrieve the number of leagues in the database.
+    """
+    
+    query = db.Select('COUNT(*) as count', sets='leagues')
+    for key in dict:
+        query.where &= key + " LIKE '%" + dict[key] + "%'"
+    return db.fetchone(query)['count']
+
 
 def _league_row_to_dict(row):
     return { "id": row[0],
@@ -119,46 +177,3 @@ def _get_league_teams(l_db, db):
         teams.append(team)
 
     return teams
-
-
-def get_leagues(db, pager, dict={}, fixtures=True, teams=True):
-    query = db.Select(sets='leagues')
-    offset, limit = pager.items
-    query.offset = offset
-    query.limit = limit
-    query.order = 'name'
-
-    for key in dict:
-        query.where &= key + " LIKE '%" + dict[key] + "%'"
-
-    leagues_db = db.fetchall(query)
-    leagues = []
-
-    for l_db in leagues_db:
-        league = League(_league_row_to_dict(l_db))
-        if fixtures == True:
-            league.fixtures = _get_league_fixtures(l_db, db)
-        if teams == True:
-            league.teams = _get_league_teams(l_db, db)
-        leagues.append(league)
-
-    return leagues
-
-
-def get_league(db, league_id, fixtures=True, teams=True):
-    query = db.Select(sets='leagues')
-    query.where = 'id = ' + str(league_id)
-    l_db = db.fetchall(query)
-    league = League(_league_row_to_dict(l_db[0]))
-    if fixtures == True:
-        league.fixtures = _get_league_fixtures(l_db[0], db)
-    if teams == True:
-        league.teams = _get_league_teams(l_db[0], db)
-    return league
-
-
-def get_leagues_count(db, dict={}):
-    query = db.Select('COUNT(*) as count', sets='leagues')
-    for key in dict:
-        query.where &= key + " LIKE '%" + dict[key] + "%'"
-    return db.fetchone(query)['count']

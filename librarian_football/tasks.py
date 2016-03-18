@@ -39,9 +39,11 @@ def fsal_callback(supervisor, event):
 
 def dump_database(db):
     """
-    'leagues' table has to be deleted last because 'teams' and 'fixtures' tables
-    have foreign keys to the 'leagues' table.
+    Delete all data in the football database. 'leagues' table has to be deleted
+    last because 'teams' and 'fixtures' tables have foreign keys to the 'leagues' 
+    table.
     """
+    
     query_teams = db.Delete('teams')
     query_fixtures = db.Delete('fixtures')
     query_leagues = db.Delete('leagues')

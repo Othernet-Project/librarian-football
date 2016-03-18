@@ -4,6 +4,11 @@ from librarian_core.contrib.cache.decorators import invalidates
 
 
 def parse(db, files, dirs):
+    """
+    Reads in all football data files and imports the data
+    into the database.
+    """
+
     leagues_file = _find_leagues_file(files)
     fixture_files = _find_fixture_files(files)
     rankings_files = _find_rankings_files(files)
@@ -89,6 +94,10 @@ def _is_rankings_file(path):
 
 
 def _import_leagues(db, file):
+    """
+    Import the new leagues into the database
+    """
+
     file_path = file.path
     with open(file_path) as f:
         json_leagues = json.load(f)
@@ -99,6 +108,10 @@ def _import_leagues(db, file):
 
 
 def _import_fixtures(db, files):
+    """
+    Import the new fixtures into the database
+    """
+
     for file in files:
         file_path = file.path
         with open(file_path) as f:
@@ -112,6 +125,10 @@ def _import_fixtures(db, files):
 
 
 def _import_rankings(db, files):
+    """
+    Import the new rankings data into the database
+    """
+    
     for file in files:
         file_path = file.path
         with open(file_path) as f:
