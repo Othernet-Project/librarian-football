@@ -16,7 +16,6 @@ EXPORTS = {
 
 
 @view('football/leagues_list')
-@cached(prefix='leagues_list')
 def leagues_list():
     try:
         q = urlunquote(request.params['q'])
@@ -45,7 +44,17 @@ def leagues_list():
                 view=request.params.get('view'))
 
 
+@view('football/league_detail')
+def league_detail(id):
+    db = request.db['football']
+    league = football.get_league(db, id)
+    return dict(league=league,
+                base_path=i18n_url('league:detail', id=id),
+                view=request.params.get('view'))
+
+
 def routes(config):
     return (
         ('leagues:list', leagues_list, 'GET', '/football/leagues/', {}),
+        ('league:detail', league_detail, 'GET', '/football/leagues/<id>', {})
     )

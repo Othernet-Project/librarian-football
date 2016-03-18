@@ -3,7 +3,6 @@ import json
 from librarian_core.contrib.cache.decorators import invalidates
 
 
-@invalidates(prefix='leagues_list')
 def parse(db, files, dirs):
     leagues_file = _find_leagues_file(files)
     fixture_files = _find_fixture_files(files)

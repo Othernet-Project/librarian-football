@@ -25,8 +25,14 @@ class Fixture(object):
         self.status = params['status']
         self.date = params['date']
         self.matchday = params['matchday']
-        self.home_team_goals = params['home_team_goals']
-        self.away_team_goals = params['away_team_goals']
+        if params['home_team_goals'] == None:
+            self.home_team_goals = '-:-'
+        else:
+            self.home_team_goals = params['home_team_goals']
+        if params['away_team_goals'] == None:
+            self.away_team_goals = '-:-'
+        else:
+            self.away_team_goals = params['away_team_goals']
 
 
 class Team(object):
@@ -83,7 +89,7 @@ def _team_row_to_dict(row):
 
 def _get_league_fixtures(l_db, db):
     league_id = str(l_db[0])
-    num_matchdays = l_db[4]
+    num_matchdays = l_db[6]
 
     fixtures = []
     for k in range(1, num_matchdays + 1):
