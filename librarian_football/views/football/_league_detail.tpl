@@ -7,30 +7,26 @@
     </ul>
     <div class="tab-content">
         <div id="tab-schedule" class="tab active">
-            ${league_schedule(league.fixtures, league.current_matchday)}
+           ${league_schedule(fixtures, league['current_matchday'], league['number_of_matchdays'])} 
         </div>
         <div id="tab-standings" class="tab">
-            ${league_standings(league.teams)}
+            ${league_standings(teams)}
         </div>
     </div>
 </div>
 
-<%def name="league_schedule(fixtures, current_matchday)">
+<%def name="league_schedule(fixtures, current_matchday, num_matchdays)">
 <div class="matchday-sections dashboard-sections o-collapsible">
-    % for matchday in fixtures:
-    <div class="matchday-section dashboard-section o-collapsible-section ${nojs.cls_toggle('matchday' + str(loop.index), 'o-collapsed', flip=True)}">
+    % for k in range(1, num_matchdays + 1):
+    <div class="matchday-section dashboard-section o-collapsible-section ${nojs.cls_toggle('matchday{}'.format(k), 'o-collapsed', flip=True)}">
         <h2 class="o-collapsible-section-title">
             <a href="${nojs.comp_url('matchday' + str(loop.index))}" role="button">
                 <span class="icon"></span>
-                Week ${loop.index + 1}
+                Week ${k}
             </a>
         </h2>
         <div class="o-collapsible-section-panel">
-            % if len(matchday) == 0:
-            <div class="football-error">
-                Sorry, no fixtures are available for this match week. Please check back later.
-            </div>
-            % else:
+        <% matchday = (fixture for fixture in fixtures if fixture['matchday'] == k) %>
             <table class="schedule-table">
                 <tr class="schedule-table-row">
                     <th>Date Time</th>
@@ -41,15 +37,14 @@
                 </tr>
                 % for match in matchday:
                 <tr class="schedule-table-row">
-                    <td>${match.date}</th>
-                    <td>${match.home_team_name}</td>
-                    <td>${match.home_team_goals}</td>
-                    <td>${match.away_team_goals}</td>
-                    <td>${match.away_team_name}</td>
+                    <td>${match['date']}</th>
+                    <td>${match['home_team_name']}</td>
+                    <td>${match['home_team_goals']}</td>
+                    <td>${match['away_team_goals']}</td>
+                    <td>${match['away_team_name']}</td>
                 </tr>
                 % endfor
             </table>
-            % endif
         </div>
     </div>
     % endfor
@@ -73,11 +68,11 @@
         </tr>
         % for t in teams:
         <tr class="standings-table-row">
-            <td>${t.position}</td>
-            <td>${t.name}</td>
-            <td>${t.wins}</td>
-            <td>${t.losses}</td>
-            <td>${t.draws}</td>
+            <td>${t['position']}</td>
+            <td>${t['name']}</td>
+            <td>${t['wins']}</td>
+            <td>${t['losses']}</td>
+            <td>${t['draws']}</td>
         </tr>
         % endfor
     </table>

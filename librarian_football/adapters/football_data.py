@@ -1,7 +1,5 @@
 import json
 
-from librarian_core.contrib.cache.decorators import invalidates
-
 
 def parse(db, files, dirs):
     """
@@ -101,7 +99,8 @@ def _import_leagues(db, file):
     file_path = file.path
     with open(file_path) as f:
         json_leagues = json.load(f)
-        cols = ['id', 'name', 'short_name', 'current_matchday', 'number_of_games', 'number_of_matchdays', 'last_updated', 'year', 'number_of_teams']
+        cols = ['id', 'name', 'short_name', 'current_matchday', 'number_of_games',
+                'number_of_matchdays', 'last_updated', 'year', 'number_of_teams']
         query = db.Insert('leagues', cols=cols)
         vals = (_get_league_dict(league) for league in json_leagues)
         db.executemany(query, vals)

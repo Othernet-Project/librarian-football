@@ -1,3 +1,4 @@
+import logging
 import fsal.events as fs
 import adapters.football_data as adapter
 
@@ -24,6 +25,7 @@ def fsal_callback(supervisor, event):
     if 'football' not in event.src:
         return
 
+    logging.info('FOOTBALL: New data has been downloaded')
     config = supervisor.config
     fsal_client = supervisor.exts.fsal
     db = supervisor.exts.databases['football']
@@ -31,8 +33,12 @@ def fsal_callback(supervisor, event):
 
     if success:
         dump_database(db)
+        logging.info('FOOTBALL: Database dumped')
         adapter.parse(db, files, dirs)
+        logging.info('FOOTBALL: New data imported to database')
         fsal_client.remove(event.src)
+    else:
+        logging.info('FOOTBALL: Something unexpected happened, ignore new data')
 
     return
 
@@ -40,8 +46,8 @@ def fsal_callback(supervisor, event):
 def dump_database(db):
     """
     Delete all data in the football database. 'leagues' table has to be deleted
-    last because 'teams' and 'fixtures' tables have foreign keys to the 'leagues' 
-    table.
+    last because 'teams' and 'fixtures' tables have foreign keys that reference
+    'leagues'.
     """
    
     for table in ('teams', 'fixtures', 'leagues'):
