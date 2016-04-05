@@ -7,7 +7,7 @@
     </ul>
     <div class="tab-content">
         <div id="tab-schedule" class="tab active">
-           ${league_schedule(fixtures, league['current_matchday'], league['number_of_matchdays'])} 
+            ${league_schedule(fixtures, league['current_matchday'], league['number_of_matchdays'])} 
         </div>
         <div id="tab-standings" class="tab">
             ${league_standings(teams)}

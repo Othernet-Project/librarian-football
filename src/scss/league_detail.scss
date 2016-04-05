@@ -29,7 +29,6 @@
 
 .tab-links a:hover {
     color: #fff;
-    background-color: #089bd2;
     text-decoration: none;
 }
 
@@ -60,9 +59,10 @@ li.active a, li.active a:hover {
 }
 
 .standings-table-row th {
-    padding: 5px;
+    padding: 7px;
     color: #fff;
     background-color: #089bd2;
+    border-top: 1px solid #ddd;
 }
 
 .schedule-table {
