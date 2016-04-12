@@ -1,0 +1,74 @@
+.standings-table-container {
+  margin: auto;
+  width: 60%;
+}
+
+.standings-table {
+  width: 100%;
+  -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* line 73, ../../../src/scss/league_detail.scss */
+.standings-table-row td, th {
+  padding: 10px;
+}
+
+/* line 77, ../../../src/scss/league_detail.scss */
+.standings-table-row th {
+  color: #fff;
+  background-color: #089bd2;
+  text-align: center;
+}
+
+/* line 82, ../../../src/scss/league_detail.scss */
+.standings-table-row td {
+  background-color: #fff;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+
+.standings-table tr:first-child th {
+  -moz-border-radius-topleft: 0.3rem;
+  -webkit-border-top-left-radius: 0.3rem;
+  border-top-left-radius: 0.3rem;
+  -moz-border-radius-topright: 0.3rem;
+  -webkit-border-top-right-radius: 0.3rem;
+  border-top-right-radius: 0.3rem;
+  text-transform: uppercase;
+  font-size: 150%;
+  padding: 20px;
+}
+
+.standings-table tr:last-child td:first-child {
+  -moz-border-radius-bottomleft: 0.3rem;
+  -webkit-border-bottom-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.standings-table tr:last-child td:last-child {
+  -moz-border-radius-bottomright: 0.3rem;
+  -webkit-border-bottom-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.standings-table tr:nth-child(2) th {
+  padding-top: 0px;
+  border-right: 1px solid #fff;
+  width: 20%;
+}
+
+.standings-table tr:nth-child(2) th:last-child {
+  border-right: none;
+}
+
+.standings-table-error {
+  background-color: #fff;
+  text-align: center;
+  font-size: 120%;
+  padding: 10px;
+  -moz-border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  border-radius: 0.3rem;
+}

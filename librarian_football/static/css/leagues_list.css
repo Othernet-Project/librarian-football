@@ -1,46 +1,32 @@
-/* line 1, ../../../src/scss/leagues_list.scss */
-.leagues-list .leagues-list-item {
+.list .list-item {
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   background: rgba(255, 255, 255, 0.75);
-  border-bottom: 1px solid #ddd;
   overflow: hidden;
   position: relative;
   margin-bottom: 1rem;
 }
 
-/* line 12, ../../../src/scss/leagues_list.scss */
-.leagues-list .leagues-list-item a {
+.list .list-item p:first-child {
+  padding: 1rem;
   font-size: 150%;
   font-weight: bold;
-  text-decoration: none;
-  display: inline-block;
   border-bottom: 1px solid #ddd;
-  padding: 1rem;
-  width: 100%;
-  color: #333;
-  transition: all 0.3s ease;
 }
 
-/* line 24, ../../../src/scss/leagues_list.scss */
-.leagues-list .leagues-list-item a:hover {
-  color: #00A2DB;
-}
-
-/* line 28, ../../../src/scss/leagues_list.scss */
-.leagues-list .leagues-list-item p {
-  font-size: 120%;
-  font-weight: normal;
-  text-decoration: none;
-  display: inline-block;
+.list .list-item p:last-child {
   padding-left: 1rem;
-  padding-top: 1rem;
-  width: 100%;
-  color: #333;
+  font-size: 120%;
 }
 
-/* line 39, ../../../src/scss/leagues_list.scss */
+.list .list-item a {
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  font-size: 120%;
+  display: inline-block;
+}
+
 .pager {
   text-align: center;
   margin-top: 2rem;

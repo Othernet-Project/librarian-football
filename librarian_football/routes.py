@@ -35,20 +35,31 @@ def leagues_list():
                 view = request.params.get('view'))
 
 
-@view('football/league_detail')
-def league_detail(league_id):
+@view('football/league_standings')
+def league_standings(league_id):
+    db = request.db['football']
+    (league, fixtures, teams) = football.get_league(db, league_id)
+
+    return dict(league = league,
+                teams = teams,
+                base_path = i18n_url('league:standings', league_id = league_id),
+                view = request.params.get('view'))
+
+
+@view('football/league_schedule')
+def league_schedule(league_id):
     db = request.db['football']
     (league, fixtures, teams) = football.get_league(db, league_id)
 
     return dict(league = league,
                 fixtures = fixtures,
-                teams = teams,
-                base_path = i18n_url('league:detail', league_id = league_id),
+                base_path = i18n_url('league:schedule', league_id = league_id),
                 view = request.params.get('view'))
 
 
 def routes(config):
     return (
         ('leagues:list', leagues_list, 'GET', '/football/leagues/', {}),
-        ('league:detail', league_detail, 'GET', '/football/leagues/<league_id>', {})
+        ('league:standings', league_standings, 'GET', '/football/leagues/standings/<league_id>/', {}),
+        ('league:schedule', league_schedule, 'GET', '/football/leagues/schedules/<league_id>/', {})
     )

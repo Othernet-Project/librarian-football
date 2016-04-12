@@ -1,9 +1,11 @@
 <%namespace name="ui_pager" file="/ui/pager.tpl"/>
 
-<ul class="leagues-list" id="leagues-list">
+<ul class="list">
     % for l in leagues:
-    <li class="leagues-list-item" role="row">
-        <a href="${i18n_url('league:detail', league_id=l['id'])}">${l['name']}</a>
+    <li class="list-item">
+        <p>${l['name']}</p>
+        <a href="${i18n_url('league:schedule', league_id=l['id'])}">Schedule</a>
+        <a href="${i18n_url('league:standings', league_id=l['id'])}">Standings</a>
         <p>Last Updated: ${l['last_updated']}</p>
     </li>
     % endfor
