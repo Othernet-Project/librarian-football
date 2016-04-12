@@ -13,7 +13,7 @@ ${_('{} - Standings'.format(league['name']))}
 </%block>
 
 <%block name="main">
-<div class="o-main-inner" id="league-detail-container">
+<div class="o-main-inner">
     ${league_standings.body()}
 </div>
 </%block>

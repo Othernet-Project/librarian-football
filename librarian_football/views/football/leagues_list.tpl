@@ -32,7 +32,7 @@ ${_('Leagues')}
 </%block>
 
 <%block name="main">
-<div class="o-main-inner" id="leagues-list-container">
+<div class="o-main-inner">
     ${leagues_list.body()}
 </div>
 </%block>

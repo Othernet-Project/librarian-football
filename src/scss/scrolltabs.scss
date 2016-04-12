@@ -25,7 +25,7 @@
  *
  *
  */
-/* line 29, ../../../src/scss/scrolltabs.scss */
+
 .scroll_tabs_container {
   position: relative;
   top: 0px;
@@ -36,17 +36,14 @@
   margin-bottom: 10px;
 }
 
-/* line 39, ../../../src/scss/scrolltabs.scss */
 ul.scroll_tabs_container {
   list-style: none;
 }
 
-/* line 43, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container div.scroll_tab_inner {
   height: 40px;
 }
 
-/* line 47, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container div.scroll_tab_inner span, .scroll_tabs_container div.scroll_tab_inner li {
   padding-left: 20px;
   padding-right: 20px;
@@ -57,7 +54,6 @@ ul.scroll_tabs_container {
   cursor: pointer;
 }
 
-/* line 57, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container div.scroll_tab_inner li {
   display: -moz-inline-stack;
   display: inline-block;
@@ -65,19 +61,16 @@ ul.scroll_tabs_container {
   list-style-type: none;
 }
 
-/* line 64, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container div.scroll_tab_inner span.scroll_tab_left_finisher {
   padding: 0px;
   width: 0px;
 }
 
-/* line 69, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container div.scroll_tab_inner span.scroll_tab_right_finisher {
   padding: 0px;
   width: 0px;
 }
 
-/* line 74, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_left_button {
   height: 40px;
   background-color: #444444;
@@ -95,24 +88,20 @@ ul.scroll_tabs_container {
   border-radius-bottom-left: 0.3rem;
 }
 
-/* line 91, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_left_button::before {
   content: "\25C0";
   line-height: 40px;
   padding-left: 5px;
 }
 
-/* line 97, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_left_button_over {
   background-color: #999999;
 }
 
-/* line 101, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_left_button_disabled {
   background-color: #444444;
 }
 
-/* line 105, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_right_button {
   height: 40px;
   background-color: #444444;
@@ -130,29 +119,24 @@ ul.scroll_tabs_container {
   border-radius-bottom-right: 0.3rem;
 }
 
-/* line 122, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_right_button::before {
   content: "\25B6";
   line-height: 40px;
   padding-left: 5px;
 }
 
-/* line 128, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_right_button_over {
   background-color: #999999;
 }
 
-/* line 132, ../../../src/scss/scrolltabs.scss */
 .scroll_tabs_container .scroll_tab_right_button_disabled {
   background-color: #444444;
 }
 
-/* line 136, ../../../src/scss/scrolltabs.scss */
 div.scroll_tab_inner li.scroll_tab_over {
   background-color: #999999;
 }
 
-/* line 140, ../../../src/scss/scrolltabs.scss */
 div.scroll_tab_inner li.tab_selected {
   background-color: #999999;
 }

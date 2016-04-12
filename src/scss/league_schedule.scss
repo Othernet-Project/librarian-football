@@ -1,25 +1,20 @@
-/* line 1, ../../../src/scss/league_schedule.scss */
 .matchday-tab-set {
   margin: auto;
   width: 70%;
 }
 
-/* line 6, ../../../src/scss/league_schedule.scss */
 #matchday-tab-links a {
-  color: #fff;
+    color: #fff;
 }
 
-/* line 10, ../../../src/scss/league_schedule.scss */
 .matchday-tab {
   display: none;
 }
 
-/* line 14, ../../../src/scss/league_schedule.scss */
 .matchday-tab.matchday-selected {
-  display: block;
+  display:block;
 }
 
-/* line 18, ../../../src/scss/league_schedule.scss */
 .schedule-table {
   width: 100%;
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
@@ -27,26 +22,22 @@
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
-/* line 25, ../../../src/scss/league_schedule.scss */
 .schedule-table-row td, th {
   padding: 10px;
 }
 
-/* line 29, ../../../src/scss/league_schedule.scss */
 .schedule-table-row th {
   color: #fff;
   background-color: #089bd2;
   text-align: center;
 }
 
-/* line 35, ../../../src/scss/league_schedule.scss */
 .schedule-table-row td {
   background-color: #fff;
   border-top: 1px solid #ddd;
   text-align: center;
 }
 
-/* line 41, ../../../src/scss/league_schedule.scss */
 .schedule-table tr:first-child th {
   -moz-border-radius-topleft: 0.3rem;
   -webkit-border-top-left-radius: 0.3rem;
@@ -59,28 +50,24 @@
   padding: 20px;
 }
 
-/* line 53, ../../../src/scss/league_schedule.scss */
 .schedule-table tr:last-child td:first-child {
   -moz-border-radius-bottomleft: 0.3rem;
   -webkit-border-bottom-left-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
 }
 
-/* line 59, ../../../src/scss/league_schedule.scss */
 .schedule-table tr:last-child td:last-child {
   -moz-border-radius-bottomright: 0.3rem;
   -webkit-border-bottom-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
 }
 
-/* line 65, ../../../src/scss/league_schedule.scss */
 .schedule-table tr:nth-child(2) th {
   padding-top: 0px;
   border-right: 1px solid #fff;
   width: 20%;
 }
 
-/* line 71, ../../../src/scss/league_schedule.scss */
 .schedule-table tr:nth-child(2) th:last-child {
   border-right: none;
 }

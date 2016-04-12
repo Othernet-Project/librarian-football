@@ -13,7 +13,7 @@ ${_('{} - Schedule'.format(league['name']))}
 </%block>
 
 <%block name="main">
-<div class="o-main-inner" id="league-schedule-container">
+<div class="o-main-inner">
     ${league_schedule.body()}
 </div>
 </%block>

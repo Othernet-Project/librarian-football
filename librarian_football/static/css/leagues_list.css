@@ -1,13 +1,24 @@
+/* line 1, ../../../src/scss/leagues_list.scss */
+.leagues-list-container {
+  margin: auto;
+  width: 70%;
+}
+
+/* line 6, ../../../src/scss/leagues_list.scss */
 .list .list-item {
   -moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+  -moz-border-radius: 0.3rem;
+  -webkit-border-radius: 0.3rem;
+  border-radius: 0.3rem;
   background: rgba(255, 255, 255, 0.75);
   overflow: hidden;
   position: relative;
   margin-bottom: 1rem;
 }
 
+/* line 19, ../../../src/scss/leagues_list.scss */
 .list .list-item p:first-child {
   padding: 1rem;
   font-size: 150%;
@@ -15,11 +26,13 @@
   border-bottom: 1px solid #ddd;
 }
 
+/* line 26, ../../../src/scss/leagues_list.scss */
 .list .list-item p:last-child {
   padding-left: 1rem;
   font-size: 120%;
 }
 
+/* line 31, ../../../src/scss/leagues_list.scss */
 .list .list-item a {
   padding-left: 1rem;
   padding-bottom: 1rem;
@@ -27,6 +40,7 @@
   display: inline-block;
 }
 
+/* line 38, ../../../src/scss/leagues_list.scss */
 .pager {
   text-align: center;
   margin-top: 2rem;
