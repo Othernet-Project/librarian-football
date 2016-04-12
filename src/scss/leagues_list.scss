@@ -1,6 +1,6 @@
 .leagues-list-container {
   margin: auto;
-  width: 70%;  
+  width: 70%;
 }
 
 .list .list-item {
@@ -11,26 +11,19 @@
   -webkit-border-radius: 0.3rem;
   border-radius: 0.3rem;
   background: rgba(255, 255, 255, 0.75);
-  overflow: hidden;
-  position: relative;
   margin-bottom: 1rem;
 }
 
 .list .list-item p:first-child {
   padding: 1rem;
+  margin-bottom: 0;
   font-size: 150%;
   font-weight: bold;
   border-bottom: 1px solid #ddd;
 }
 
-.list .list-item p:last-child {
-  padding-left: 1rem;
-  font-size: 120%;
-}
-
 .list .list-item a {
-  padding-left: 1rem;
-  padding-bottom: 1rem;
+  padding: 1rem;
   font-size: 120%;
   display: inline-block;
 }
