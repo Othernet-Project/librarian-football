@@ -1,7 +1,24 @@
 import json
 
 
-def parse(db, files, dirs):
+def check(files):
+    """
+    Verifies the given football data files. This is needed to ensure
+    that there won't be any conflicts when importing the data. Since
+    all the old data in the database will be dumped, it is important
+    that this check be correct.
+    """
+
+    for f in files:
+        # Verify file type
+        if _is_leagues_file(f.path) or _is_fixture_file(f.path) or _is_rankings_file(f.path):
+            continue
+        else:
+            return False
+    return True
+
+
+def parse(db, files):
     """
     Reads in all football data files and imports the data
     into the database.
@@ -101,7 +118,7 @@ def _import_leagues(db, file):
         json_leagues = json.load(f)
         cols = ['id', 'name', 'short_name', 'current_matchday', 'number_of_games',
                 'number_of_matchdays', 'last_updated', 'year', 'number_of_teams']
-        query = db.Insert('leagues', cols=cols)
+        query = db.Replace('leagues', constraints=['id'], cols=cols)
         vals = (_get_league_dict(league) for league in json_leagues)
         db.executemany(query, vals)
 
@@ -118,7 +135,7 @@ def _import_fixtures(db, files):
             if json_fixtures.has_key('fixtures'):
                 cols = ['id', 'league_id', 'home_team_name', 'away_team_name', 'status',
                         'date', 'matchday', 'home_team_goals', 'away_team_goals']
-                query = db.Insert('fixtures', cols=cols)
+                query = db.Replace('fixtures', constraints=['id'], cols=cols)
                 vals = (_get_fixture_dict(fixture) for fixture in json_fixtures['fixtures'])
                 db.executemany(query, vals)
 
@@ -134,7 +151,7 @@ def _import_rankings(db, files):
             json_rankings = json.load(f)
             if json_rankings.has_key('standing') and json_rankings.has_key('_links'):
                 cols = ['id', 'league_id', 'name', 'position', 'wins', 'losses', 'draws']
-                query = db.Insert('teams', cols=cols)
+                query = db.Replace('teams', constraints=['id'], cols=cols)
                 league_id = _get_league_id_from_rankings_links(json_rankings['_links'])
                 vals = (_get_team_dict(team, league_id) for team in json_rankings['standing'])
                 db.executemany(query, vals)

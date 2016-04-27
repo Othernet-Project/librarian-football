@@ -32,10 +32,14 @@ def fsal_callback(supervisor, event):
     (success, dirs, files) = fsal_client.list_dir(event.src)
 
     if success:
-        dump_database(db)
-        logging.info('FOOTBALL: Database dumped')
-        adapter.parse(db, files, dirs)
-        logging.info('FOOTBALL: New data imported to database')
+        check = adapter.check(files)
+        if check:
+            #dump_database(db)
+            #logging.info('FOOTBALL: Database dumped')
+            adapter.parse(db, files)
+            logging.info('FOOTBALL: New data imported to database')
+        else:
+            logging.info('FOOTBALL: Downloaded data is corrupt, ignore new data')
         fsal_client.remove(event.src)
     else:
         logging.info('FOOTBALL: Something unexpected happened, ignore new data')
